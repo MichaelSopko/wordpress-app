@@ -1,15 +1,14 @@
 <?php get_header(); ?>
-<?php get_template_part('template-parts/breadcrumbs'); ?>
+<?php get_template_part('template-parts/breadcrumbs-archive'); ?>
+
     <section class="post_blog_bg primary-bg">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <?php if ( have_posts() ) : ?>
                         <?php while ( have_posts() ) : the_post();
-                            get_template_part('template-parts/content-search', 'search');
+                            get_template_part('template-parts/content', get_post_format());
                         endwhile; ?>
-                    <?php else : ?>
-                        <?php get_template_part('template-parts/content-none', 'none'); ?>
                     <?php endif; ?>
                     <?php wptuts_pagination(); ?>
                 </div>
