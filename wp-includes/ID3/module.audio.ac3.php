@@ -519,7 +519,7 @@ $thisfile_ac3['bitrate'] = round(($thisfile_ac3['bitrate'] * 1.05) / 16000) * 16
 	}
 
 	public static function audioCodingModeLookup($acmod) {
-		// array(channel configuration, # channels (not incl LFE), channel order)
+		// array(channel configuration, # channels (not inc LFE), channel order)
 		static $audioCodingModeLookup = array (
 			0 => array('channel_config'=>'1+1', 'num_channels'=>2, 'channel_order'=>'Ch1,Ch2'),
 			1 => array('channel_config'=>'1/0', 'num_channels'=>1, 'channel_order'=>'C'),

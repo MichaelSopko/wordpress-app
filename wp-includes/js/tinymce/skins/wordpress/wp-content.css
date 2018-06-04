@@ -275,7 +275,7 @@ p.wp-policy-help {
  */
 
 .wpview {
-	width: 99.99%; /* All IE need hasLayout, incl. 11 (ugh, not again!!) */
+	width: 99.99%; /* All IE need hasLayout, inc. 11 (ugh, not again!!) */
 	position: relative;
 	clear: both;
 	margin-bottom: 16px;

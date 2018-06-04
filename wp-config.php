@@ -20,13 +20,13 @@
 
 // ** Параметры MySQL: Эту информацию можно получить у вашего хостинг-провайдера ** //
 /** Имя базы данных для WordPress */
-define('DB_NAME', 'test_db');
+define('DB_NAME', 'test');
 
 /** Имя пользователя MySQL */
 define('DB_USER', 'root');
 
 /** Пароль к базе данных MySQL */
-define('DB_PASSWORD', '123456');
+define('DB_PASSWORD', 'root');
 
 /** Имя сервера MySQL */
 define('DB_HOST', 'localhost');
@@ -46,14 +46,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'm ;Xc))A>)#f[=WQo]^NnHC?U <4}v+tshZ~aVQ_7~A!x{}=@v!E(paqsn5)b3(l');
-define('SECURE_AUTH_KEY',  '*ancXEyI9lH,e}$r4BoDb[f84sm=Ds}GSI5W`Z%8p=kU/hpfU2:X=f|EobTmotpJ');
-define('LOGGED_IN_KEY',    'kGy2m-q+%@G&S[FKPA=3Av@6jpOs`^:mM;ThfU9??xe&CJJ#.[D))0+)qbKw9OW,');
-define('NONCE_KEY',        '( P$Eq2Ih4&?R?fFX[w@jY#D.B]sE;kKe(K45`U`ly1:Mrf%(w6]+HtOM612IAwy');
-define('AUTH_SALT',        'iSE(?swr#0*a!9s+=+>LAs-PB ^ O{~XUwi(.h)`v]8`klCKG`GT7@FWOf%9H0>v');
-define('SECURE_AUTH_SALT', ' MfHqN<:.S4VB]J/Z,W@`f&dm`m|E9@T%wk`obl@Z^,`N{5c>)8K_G9Gju7Ko4h}');
-define('LOGGED_IN_SALT',   'M6Xhp^}*(NSXf7k QHuep5BJ2rz1g<.Nrxr8e3V`FAN9/a@0CNN`<DR:$b/~]kl:');
-define('NONCE_SALT',       'jUnp5L^jL}@t]()Z7WJ_4HU,/&G5-JEfvueoFacn~7k{oK(iFr}O%{kvRNzWc8am');
+define('AUTH_KEY',         'M$g)I]H;sAbH8mB<T/gnhILNd1hf>j?a-cY=6]r5A;.bBHlYqLKv<!QO=WOCao9I');
+define('SECURE_AUTH_KEY',  'q4x<ye*po1,<#Sm!yM],N^XYkbxNk1]@133{,)D_)/T:4VH=f7^_-85&}iHL8%%j');
+define('LOGGED_IN_KEY',    '>YWR9urKsjIqP]^kdD+]lA.DGC0X:eF)HP?^T*m0=hkU_)p^D@pY kqdYB]]mr[x');
+define('NONCE_KEY',        'r~S&nO)L<TK57Zk_:J/u4u<q?t~wY(/|5=idE%8{3sJZU/6.RSe^KH!/u%:cEQH*');
+define('AUTH_SALT',        '[f>b[SZgMG&J1Cot^E:erC[okf)X@7R/9gG:;,jzh^li_Q;A`<{W5kJr;i}-7.Z5');
+define('SECURE_AUTH_SALT', 'jEmq@@Jn!NJ@U/Vij%`o{mLVcT:0lFDG[67QFN{[do*pF.ZHImVU/T(v1DT04([N');
+define('LOGGED_IN_SALT',   'Cp[&MDh[?l>}It&kCSndJV)+= |J,dk-K([I+jSIowzi]tOGYvnblelt]E&`h6Tl');
+define('NONCE_SALT',       'bYE IUYQ`r=yy/Z0~8jY.p>tvL19~8m!U@XTPq)Ab&/8x@O7|bpD6i:n$*JSIkd2');
 
 /**#@-*/
 
