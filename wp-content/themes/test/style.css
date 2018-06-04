@@ -1,18 +1,12 @@
 /*
-Theme Name: Twenty Fifteen
-Theme URI: https://wordpress.org/themes/twentyfifteen/
-Author: the WordPress team
-Author URI: https://wordpress.org/
-Description: Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer.
-Version: 2.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: blog, two-columns, left-sidebar, accessibility-ready, custom-background, custom-colors, custom-header, custom-logo, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready
-Text Domain: twentyfifteen
-
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
+Theme Name: wptuts
+Theme URI: webupblog.ru
+Description: Стартовая тема для wordpress
+Author: Шевченко Вячеслав
+Author URI: webupblog.ru
+Version: 1.0.0
 */
+
 @charset "utf-8";
 /* CSS Document */
 
@@ -32,7 +26,8 @@ body {
     position:relative;
     font-weight:300;
 }
-body.logged-in .navbar-fixed-top {
+
+body.logged-in .navbar-fixed-top{
     top: 30px;
 }
 section {
@@ -131,7 +126,7 @@ img {
 
 
 /*============
-	header
+  header
 ===================*/
 header {
     background:rgba(0, 0, 0, 0.5);
@@ -144,7 +139,7 @@ header {
 }
 
 /*=========
-	menu
+  menu
 ==========*/
 
 .dropdown .dropdown-toggle::after{
@@ -225,7 +220,7 @@ header {
     padding-right: 0;
 }
 
-@media (min-width:990px) {.navbar-collapse { display: inline-block;}	}
+@media (min-width:990px) {.navbar-collapse { display: inline-block;}  }
 
 /*----------blog----------*/
 section.post_blog_bg {
@@ -315,7 +310,9 @@ section.post_blog_bg {
 article.blog_post:last-child {
     border-bottom: medium none;
 }
-
+.page_wrap {
+    padding: 55px 0 40px 0;
+}
 .page-numbers {
     clear: both;
     margin: 30px auto;
@@ -406,13 +403,13 @@ article.blog_post:last-child {
 }
 
 
-.widget_subscribe p {
+.news_sletter p {
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
     color: hsl(0, 0%, 100%);
 }
-.widget_subscribe {
+.news_sletter {
     background: hsl(0, 0%, 0%) none repeat scroll 0 0;
     padding: 27px;
     margin-bottom: 40px;
@@ -421,6 +418,7 @@ article.blog_post:last-child {
 .blog_form .form-control {
     border: medium none;
     border-radius: 10px;
+    -webkit-box-shadow: none;
     box-shadow: none;
     height: 50px;
 }
@@ -547,12 +545,11 @@ article.blog_post {
     padding: 25px 0;
 }
 
-.widget_subscribe h6 {
+.widget_subscribe .side_bar_heading h6 {
     color: #fff;
 }
-.widget_subscribe h6:after {
-    color: #fff;
-    opacity: 0.5;
+.widget_subscribe .side_bar_heading h6::after {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 
@@ -651,6 +648,7 @@ section.coming_soon_bg:after {
 .email_field .form-control {
     border: 1px solid hsl(0, 0%, 80%);
     border-radius: 10px;
+    -webkit-box-shadow: none;
     box-shadow: none;
     color: hsl(0, 0%, 0%);
     font-size: 18px;
@@ -814,6 +812,7 @@ ul.breadcrumbs_m {
 .error_form .form-control {
     border: 1px solid hsl(0, 0%, 80%);
     border-radius: 10px;
+    -webkit-box-shadow: none;
     box-shadow: none;
     color: hsl(0, 0%, 0%);
     font-size: 18px;
@@ -892,10 +891,12 @@ ul.breadcrumbs_m {
     -moz-border-top-colors: none;
     background: hsla(0, 0%, 0%, 0) none repeat scroll 0 0;
     border-color:#e5e5e5;
+    -webkit-border-image: none;
     border-image: none;
     border-radius: 0;
     border-style: none none solid;
     border-width: medium medium 1px;
+    -webkit-box-shadow: none;
     box-shadow: none;
     margin-bottom: 26px;
     padding: 20px 0;
@@ -1025,6 +1026,7 @@ section.top_banner_bg:after {
     background: hsl(357, 73%, 49%) none repeat scroll 0 0;
     border: 0 none;
     border-radius: 10px;
+    -webkit-box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.2);
     box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.2);
     color: hsl(0, 0%, 100%);
     font-size: 30px;
@@ -1237,17 +1239,12 @@ section.top_banner_bg:after {
 
 .services_detail span i {
     -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
 
 .services_detail span i:hover {
     border-radius: 50%;
     -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
 }
@@ -1379,6 +1376,8 @@ section.our_service_bg:after {
     padding: 5px 35px;
     position: absolute;
     top: 10px;
+    -webkit-transform: rotate(-43deg);
+    -ms-transform: rotate(-43deg);
     transform: rotate(-43deg);
 }
 
@@ -1649,6 +1648,7 @@ section.contact_bg:after {
 .contact_form .form-control {
     border: 1px solid hsl(0, 0%, 80%);
     border-radius: 10px;
+    -webkit-box-shadow: none;
     box-shadow: none;
     color: hsl(0, 0%, 0%);
     font-size: 18px;
@@ -1673,6 +1673,7 @@ label {
 .contact_form .form-textarea {
     border: 1px solid hsl(0, 0%, 80%);
     border-radius: 10px;
+    -webkit-box-shadow: none;
     box-shadow: none;
     color: hsl(0, 0%, 0%);
     font-size: 18px;
@@ -1723,17 +1724,12 @@ label {
 
 .contact_text span i {
     -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
 
 .contact_text span i:hover {
     border-radius: 50%;
     -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     transform: rotate(360deg);
 }
@@ -1743,6 +1739,7 @@ label {
 .subscribe_form .form-control {
     border: 1px solid hsl(0, 0%, 80%);
     border-radius: 10px;
+    -webkit-box-shadow: none;
     box-shadow: none;
     color: hsl(0, 0%, 0%);
     font-size: 18px;
@@ -2163,7 +2160,6 @@ footer .footer_bottom {
     .about_us_img {  float: none;}
 
 
-
     .text_404 {  float: left;  margin: 0 auto;  width: 49%;}
     .text_404 h1 {  font-size: 160px;padding-bottom: 0;}
     .not_found {  float: left;  margin: 0 auto;  width: 49%;}
@@ -2172,8 +2168,6 @@ footer .footer_bottom {
     .error_detail h3 {  font-size: 27px;}
     .error_form .form-control {  width: 80%;}
     .search_btn {  bottom: -33px;  left: 360px;  position: absolute;  right: 0;}
-
-
 
     .present {  text-align: center;}
     .present h1 {  font-size: 40px;  line-height: 60px;padding-bottom: 50px;}
@@ -2276,4 +2270,83 @@ footer .footer_bottom {
 
 }
 
+/*Commet list style*/
 
+.comment-list,
+.children {
+    list-style: none;
+}
+
+.comment-list .comment {
+    margin-top: 20px;
+}
+.comment-wrap-info {
+    overflow: hidden;
+}
+.comment-author,
+.comment-meta {
+    float: left;
+}
+
+.comment-meta .author-name {
+    font-family: 'Roboto Slab', serif;
+}
+
+.comment-meta .comment-date,
+.comment-reply-link {
+    font-size: 11px;
+    color: #333;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.comment-meta .comment-date:hover,
+.comment-reply-link:hover,
+.comment-awaiting-moderation {
+    color: #f6b20e;
+}
+
+.comment-author {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+/*Search form*/
+.search-form {
+    display: table;
+    width: 100%;
+}
+.search-field {
+    display: table-cell;
+    width: 100%;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-right: 0;
+    padding: 0 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.search-submit-wrap {
+    display: table-cell;
+    width: 1%;
+    position: relative;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 0;
+}
+.search-submit {
+    height: 50px;
+    width: 50px;
+    background: hsl(39, 100%, 50%);
+    border: 0;
+}
+.icon-search {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    margin-top: -10px;
+    margin-left: -10px;
+}

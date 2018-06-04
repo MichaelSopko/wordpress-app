@@ -5,27 +5,22 @@ require get_template_directory() . '/inc/class-wptuts-subscribe-form-widget.php'
 
 function wptuts_register_widget() {
     register_widget( 'Wptuts_Widget_Recent_Posts' );
-    register_widget( 'Wptuts_Widget_Subbscribe' );
+    register_widget( 'Wptuts_Widget_Subscribe' );
 }
 
 add_action( 'widgets_init', 'wptuts_register_widget' );
 
 function wptuts_setup() {
-    load_theme_textdomain('wptuts');
+    load_theme_textdomain('wptuts', get_template_directory() . '/lang');
     add_theme_support('title-tag');
-    add_theme_support('custom-logo',
-        array(
-            'height' => 31,
-            'width' => 134,
-            'flex-height' => true
-        )
-    );
-
+    add_theme_support('custom-logo', array(
+        'height' => 31,
+        'width' => 134,
+        'flex-height' => true
+    ));
     add_theme_support('post-thumbnails');
-    set_post_thumbnail_size(730, 446);
-
+    set_post_thumbnail_size(730,446);
     add_image_size( 'wptuts-recent-post', 80, 80, true );
-
     add_theme_support('html5', array(
         'search_form',
         'comment-form',
@@ -33,17 +28,14 @@ function wptuts_setup() {
         'gallery',
         'caption'
     ));
-
     add_theme_support('post-formats', array(
         'aside',
         'image',
         'video',
         'gallery'
     ));
-
-    register_nav_menu('primary', 'primary menu');
+    register_nav_menu('primary', 'Primary menu');
 }
-
 add_action('after_setup_theme', 'wptuts_setup');
 
 add_filter('excerpt_more', function($more) {
@@ -139,15 +131,15 @@ function wptuts_the_breadcrumb(){
 }
 
 /**
- * WordPress Bootstrap Pagination
+ * Pagination
  */
-function wp_pagination( $args = array() ) {
+function wptuts_pagination( $args = array() ) {
 
     $defaults = array(
         'range'           => 4,
         'custom_query'    => FALSE,
-        'previous_string' => __( 'Previous', 'text-domain' ),
-        'next_string'     => __( 'Next', 'text-domain' ),
+        'previous_string' => esc_html__( 'Previous', 'wptuts' ),
+        'next_string'     => esc_html__( 'Next', 'wptuts' ),
         'before_output'   => '<div class="next_page"><ul class="page-numbers">',
         'after_output'    => '</ul></div>'
     );
@@ -191,14 +183,14 @@ function wp_pagination( $args = array() ) {
     $previous = esc_attr( get_pagenum_link($previous) );
 
     if ( $previous && (1 != $page) )
-        $echo .= '<li><a href="' . $previous . '" class="page-numbers" title="' . __( 'previous', 'text-domain') . '">' . $args['previous_string'] . '</a></li>';
+        $echo .= '<li><a href="' . $previous . '" class="page-numbers" title="' . esc_html__( 'previous', 'wptuts') . '">' . $args['previous_string'] . '</a></li>';
 
     if ( !empty($min) && !empty($max) ) {
         for( $i = $min; $i <= $max; $i++ ) {
             if ($page == $i) {
                 $echo .= '<li class="active"><span class="page-numbers current">' . str_pad( (int)$i, 1, '0', STR_PAD_LEFT ) . '</span></li>';
             } else {
-                $echo .= sprintf( '<li><a href="%s"  class="page-numbers">%2d</a></li>', esc_attr( get_pagenum_link($i) ), $i );
+                $echo .= sprintf( '<li><a href="%s" class="page-numbers">%2d</a></li>', esc_attr( get_pagenum_link($i) ), $i );
             }
         }
     }
@@ -206,8 +198,7 @@ function wp_pagination( $args = array() ) {
     $next = intval($page) + 1;
     $next = esc_attr( get_pagenum_link($next) );
     if ($next && ($count != $page) )
-        $echo .= '<li><a href="' . $next . '" class="page-numbers" title="' . __( 'next', 'text-domain') . '">' . $args['next_string'] . '</a></li>';
-
+        $echo .= '<li><a href="' . $next . '" class="page-numbers" title="' . esc_html__( 'next', 'wptuts') . '">' . $args['next_string'] . '</a></li>';
     if ( isset($echo) )
         echo $args['before_output'] . $echo . $args['after_output'];
 }
@@ -285,32 +276,77 @@ function wptuts_customize_register( $wp_customize ) {
 }
 add_action( 'customize_register', 'wptuts_customize_register' );
 
-function wp_theme_slug_widgets_init() {
+/**
+ * Add a sidebar.
+ */
+function wptuts_widgets_init() {
     register_sidebar( array(
-        'name' => __( 'Main Sidebar', 'wptuts' ),
-        'id' => 'sidebar-1',
-        'description' => __( 'Widgets in this area will be shown on all posts and pages.', 'theme-slug' ),
-        'before_widget' => '<div id="%1$s"  class="sidebar_wrap %2$s">',
+        'name'          => esc_html__( 'Main Sidebar', 'wptuts' ),
+        'id'            => 'sidebar-1',
+        'description'   => esc_html__( 'Widgets in this area will be shown on all posts and pages.', 'wptuts' ),
+        'before_widget' => '<div id="%1$s" class="sidebar_wrap %2$s">',
         'after_widget'  => '</div>',
-        'before_title'  => ' <div class="side_bar_heading"><h6>',
+        'before_title'  => '<div class="side_bar_heading"><h6>',
         'after_title'   => '</h6></div>',
-    ) );
+    ));
 }
-
-add_action( 'widgets_init', 'wp_theme_slug_widgets_init' );
+add_action( 'widgets_init', 'wptuts_widgets_init' );
 
 function wptuts_widget_categories($args) {
     $walker = new Walker_Categories_Wptuts();
-    $args = array_merge($args, array(
-        'walker' => $walker
-    ));
+    $args = array_merge($args, array('walker' => $walker));
     return $args;
 }
 
 add_filter('widget_categories_args', 'wptuts_widget_categories');
 
 class Walker_Categories_Wptuts extends Walker_Category {
-
+    /**
+     * Starts the list before the elements are added.
+     *
+     * @since 2.1.0
+     * @access public
+     *
+     * @see Walker::start_lvl()
+     *
+     * @param string $output Used to append additional content. Passed by reference.
+     * @param int    $depth  Optional. Depth of category. Used for tab indentation. Default 0.
+     * @param array  $args   Optional. An array of arguments. Will only append content if style argument
+     *                       value is 'list'. See wp_list_categories(). Default empty array.
+     */
+    public function start_lvl( &$output, $depth = 0, $args = array() ) {
+        parent::start_lvl( $output, $depth, $args);
+    }
+    /**
+     * Ends the list of after the elements are added.
+     *
+     * @since 2.1.0
+     * @access public
+     *
+     * @see Walker::end_lvl()
+     *
+     * @param string $output Used to append additional content. Passed by reference.
+     * @param int    $depth  Optional. Depth of category. Used for tab indentation. Default 0.
+     * @param array  $args   Optional. An array of arguments. Will only append content if style argument
+     *                       value is 'list'. See wp_list_categories(). Default empty array.
+     */
+    public function end_lvl( &$output, $depth = 0, $args = array() ) {
+        parent::end_lvl( $output, $depth, $args);
+    }
+    /**
+     * Starts the element output.
+     *
+     * @since 2.1.0
+     * @access public
+     *
+     * @see Walker::start_el()
+     *
+     * @param string $output   Passed by reference. Used to append additional content.
+     * @param object $category Category data object.
+     * @param int    $depth    Optional. Depth of category in reference to parents. Default 0.
+     * @param array  $args     Optional. An array of arguments. See wp_list_categories(). Default empty array.
+     * @param int    $id       Optional. ID of the current category. Default 0.
+     */
     public function start_el( &$output, $category, $depth = 0, $args = array(), $id = 0 ) {
         /** This filter is documented in wp-includes/category-template.php */
         $cat_name = apply_filters(
@@ -318,12 +354,10 @@ class Walker_Categories_Wptuts extends Walker_Category {
             esc_attr( $category->name ),
             $category
         );
-
         // Don't generate an element if the category name is empty.
         if ( ! $cat_name ) {
             return;
         }
-
         $link = '<a href="' . esc_url( get_term_link( $category ) ) . '" ';
         if ( $args['use_desc_for_title'] && ! empty( $category->description ) ) {
             /**
@@ -336,23 +370,19 @@ class Walker_Categories_Wptuts extends Walker_Category {
              */
             $link .= 'title="' . esc_attr( strip_tags( apply_filters( 'category_description', $category->description, $category ) ) ) . '"';
         }
-
         $link .= '><i class="fa fa-folder-open-o" aria-hidden="true"></i>';
         $link .= $cat_name;
         if ( ! empty( $args['show_count'] ) ) {
             $link .= '<span>' . number_format_i18n( $category->count ) . '</span>';
         }
-        $link .= '</a>';
 
+        $link .= '</a>';
         if ( ! empty( $args['feed_image'] ) || ! empty( $args['feed'] ) ) {
             $link .= ' ';
-
             if ( empty( $args['feed_image'] ) ) {
                 $link .= '(';
             }
-
             $link .= '<a href="' . esc_url( get_term_feed_link( $category->term_id, $category->taxonomy, $args['feed_type'] ) ) . '"';
-
             if ( empty( $args['feed'] ) ) {
                 $alt = ' alt="' . sprintf(__( 'Feed for all posts filed under %s' ), $cat_name ) . '"';
             } else {
@@ -360,16 +390,13 @@ class Walker_Categories_Wptuts extends Walker_Category {
                 $name = $args['feed'];
                 $link .= empty( $args['title'] ) ? '' : $args['title'];
             }
-
             $link .= '>';
-
             if ( empty( $args['feed_image'] ) ) {
                 $link .= $name;
             } else {
                 $link .= "<img src='" . $args['feed_image'] . "'$alt" . ' />';
             }
             $link .= '</a>';
-
             if ( empty( $args['feed_image'] ) ) {
                 $link .= ')';
             }
@@ -381,14 +408,12 @@ class Walker_Categories_Wptuts extends Walker_Category {
                 'cat-item',
                 'cat-item-' . $category->term_id,
             );
-
             if ( ! empty( $args['current_category'] ) ) {
                 // 'current_category' can be an array, so we use `get_terms()`.
                 $_current_terms = get_terms( $category->taxonomy, array(
                     'include' => $args['current_category'],
                     'hide_empty' => false,
                 ) );
-
                 foreach ( $_current_terms as $_current_term ) {
                     if ( $category->term_id == $_current_term->term_id ) {
                         $css_classes[] = 'current-cat';
@@ -404,7 +429,6 @@ class Walker_Categories_Wptuts extends Walker_Category {
                     }
                 }
             }
-
             /**
              * Filters the list of CSS classes to include with each category in the list.
              *
@@ -418,7 +442,6 @@ class Walker_Categories_Wptuts extends Walker_Category {
              * @param array  $args        An array of wp_list_categories() arguments.
              */
             $css_classes = implode( ' ', apply_filters( 'category_css_class', $css_classes, $category, $depth, $args ) );
-
             $output .=  ' class="' . $css_classes . '"';
             $output .= ">$link\n";
         } elseif ( isset( $args['separator'] ) ) {
@@ -427,16 +450,84 @@ class Walker_Categories_Wptuts extends Walker_Category {
             $output .= "\t$link<br />\n";
         }
     }
+    /**
+     * Ends the element output, if needed.
+     *
+     * @since 2.1.0
+     * @access public
+     *
+     * @see Walker::end_el()
+     *
+     * @param string $output Passed by reference. Used to append additional content.
+     * @param object $page   Not used.
+     * @param int    $depth  Optional. Depth of category. Not used.
+     * @param array  $args   Optional. An array of arguments. Only uses 'list' for whether should append
+     *                       to output. See wp_list_categories(). Default empty array.
+     */
+    public function end_el( &$output, $page, $depth = 0, $args = array() ) {
+        parent::end_el( $output, $page, $depth, $args );
+    }
 }
-
 function wptuts_tag_cloud($args) {
-
-     $args['format'] = 'list';
-     $args['smallest'] = '14';
-     $args['unit'] = 'px';
-
+    $args['format'] = 'list';
+    $args['smallest'] = '14';
+    $args['unit'] = 'px';
     return $args;
-
 }
-
 add_filter('widget_tag_cloud_args', 'wptuts_tag_cloud');
+
+// Change order comment fields
+add_filter('comment_form_fields', 'wptuts_reorder_comment_fields' );
+function wptuts_reorder_comment_fields( $fields ){
+    $new_fields = array();
+    $myorder = array('author','email','comment');
+    foreach( $myorder as $key ){
+        $new_fields[ $key ] = $fields[ $key ];
+        unset( $fields[ $key ] );
+    }
+    if( $fields )
+        foreach( $fields as $key => $val )
+            $new_fields[ $key ] = $val;
+    return $new_fields;
+}
+function wptuts_list_comment($comment, $args, $depth) {
+    if ( 'div' === $args['style'] ) {
+        $tag       = 'div';
+        $add_below = 'comment';
+    } else {
+        $tag       = 'li';
+        $add_below = 'div-comment';
+    }
+    ?>
+    <<?php echo $tag ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ) ?> id="comment-<?php comment_ID() ?>">
+    <?php if ( 'div' != $args['style'] ) : ?>
+        <div id="div-comment-<?php comment_ID() ?>" class="comment-body">
+    <?php endif; ?>
+    <div class="comment-wrap-info">
+        <div class="comment-author vcard">
+            <?php if ( $args['avatar_size'] != 0 ) echo get_avatar( $comment, $args['avatar_size'] ); ?>
+        </div>
+        <div class="comment-meta commentmetadata">
+            <?php printf( __( '<cite class="fn author-name">%s</cite>' ), get_comment_author_link() ); ?>
+            <br>
+            <a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ); ?>" class="comment-date">
+                <?php
+                /* translators: 1: date, 2: time */
+                printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)' ), '  ', '' );
+            ?>
+        </div>
+    </div>
+    <?php if ( $comment->comment_approved == '0' ) : ?>
+        <em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.' ); ?></em>
+        <br />
+    <?php endif; ?>
+    <?php comment_text(); ?>
+
+    <div class="reply">
+        <?php comment_reply_link( array_merge( $args, array( 'add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+    </div>
+    <?php if ( 'div' != $args['style'] ) : ?>
+        </div>
+    <?php endif; ?>
+    <?php
+}

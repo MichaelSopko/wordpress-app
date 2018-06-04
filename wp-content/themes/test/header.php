@@ -48,13 +48,14 @@
                             </div>
 
                             <div class="collapse navbar-collapse" id="navbar">
-                                <?php wp_nav_menu(array(
-                                            'theme_location' => 'primary',
-                                            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-                                            'menu_class' => 'nav navbar-nav',
-                                            'menu_id' => '',
-                                            'depth' => 1
-                                        ));
+                                <?php
+                                wp_nav_menu(array(
+                                    'theme_location' => 'primary',
+                                    'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                                    'menu_class' => 'nav navbar-nav',
+                                    'menu_id' => '',
+                                    'depth' => 1
+                                ));
                                 ?>
                             </div>
 
